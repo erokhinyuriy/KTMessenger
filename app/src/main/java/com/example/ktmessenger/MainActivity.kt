@@ -2,10 +2,13 @@ package com.example.ktmessenger
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.ktmessenger.databinding.ActivityMainBinding
+import com.example.ktmessenger.ui.ChatsFragment
+import com.example.ktmessenger.ui.SettingsFragment
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -36,6 +39,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initFunc() {
         setSupportActionBar(mToolbar)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.dataContainer, ChatsFragment()).commit()
         createHeader()
         createDrawer()
     }
@@ -100,7 +105,11 @@ class MainActivity : AppCompatActivity() {
                     position: Int,
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
-                    Toast.makeText(applicationContext, position.toString(), Toast.LENGTH_SHORT).show()
+                    when(position) {
+                        7 ->  supportFragmentManager.beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.dataContainer, SettingsFragment()).commit()
+                    }
                     return false
                 }
             })
@@ -119,6 +128,5 @@ class MainActivity : AppCompatActivity() {
 
     private fun initFields() {
         mToolbar = mBinding.mainToolbar
-
     }
 }
