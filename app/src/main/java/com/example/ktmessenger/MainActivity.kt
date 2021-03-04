@@ -8,6 +8,8 @@ import com.example.ktmessenger.activities.RegisterActivity
 import com.example.ktmessenger.databinding.ActivityMainBinding
 import com.example.ktmessenger.ui.fragments.ChatsFragment
 import com.example.ktmessenger.ui.objects.AppDrawer
+import com.example.ktmessenger.utilites.replaceActivity
+import com.example.ktmessenger.utilites.replaceFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,16 +30,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
-        if (false){
+        if (true){
             setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.dataContainer,
-                    ChatsFragment()
-                ).commit()
+            replaceFragment(ChatsFragment())
         }else{
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            replaceActivity(RegisterActivity())
         }
     }
 

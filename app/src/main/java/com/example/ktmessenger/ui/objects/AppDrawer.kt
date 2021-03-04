@@ -4,6 +4,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ktmessenger.R
 import com.example.ktmessenger.ui.fragments.SettingsFragment
+import com.example.ktmessenger.utilites.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader
 import com.mikepenz.materialdrawer.AccountHeaderBuilder
 import com.mikepenz.materialdrawer.Drawer
@@ -83,11 +84,7 @@ class AppDrawer(val mainActivity: AppCompatActivity, val toolbar:androidx.appcom
                     drawerItem: IDrawerItem<*>
                 ): Boolean {
                     when(position) {
-                        7 -> mainActivity.supportFragmentManager.beginTransaction()
-                            .addToBackStack(null)
-                            .replace(R.id.dataContainer,
-                                SettingsFragment()
-                            ).commit()
+                        7 -> mainActivity.replaceFragment(SettingsFragment())
                     }
                     return false
                 }
